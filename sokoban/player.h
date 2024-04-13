@@ -1,18 +1,35 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "globals.h"
+
 #include "levels.h"
 #include "sounds.h"
 
 #include <cstddef>
+#include "iostream"
+class Player {
+private:
+    Player(){};
+public:
+    int player_row;
+    int player_column;
 
-void spawn_player(size_t row, size_t column) {
+    static Player &getInstance() {
+        static auto* instance_ = new Player();
+        return *instance_;
+    }
+
+    void spawn_player(size_t row, size_t column);
+
+    void move_player(int dx, int dy);
+};
+
+/*void spawn_player(size_t row, size_t column) {
     player_row = row;
     player_column = column;
-}
+}*/
 
-void move_player(int dx, int dy) {
+/*void move_player(int dx, int dy) {
     int next_row    = static_cast<int>(player_row)    + dy;
     int next_column = static_cast<int>(player_column) + dx;
     if (!is_cell_inside_level(next_row, next_column)) {
@@ -59,6 +76,6 @@ void move_player(int dx, int dy) {
             }
         }
     }
-}
+}*/
 
 #endif // PLAYER_H

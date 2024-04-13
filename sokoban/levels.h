@@ -3,10 +3,32 @@
 
 #include "globals.h"
 #include "player.h"
-#include "graphics.h"
 
 #include <cstddef>
 
+class LevelController{
+private:
+    LevelController(){};
+public:
+
+
+
+    static LevelController &getInstance() {
+        static auto* instance_ = new LevelController();
+        return *instance_;
+    }
+
+    void load_next_level();
+
+    void unload_level();
+
+    bool is_cell_inside_level(int row, int column);
+
+    char& get_level_cell(size_t row, size_t column);
+
+    void set_level_cell(size_t row, size_t column, char cell);
+};
+/*
 void load_next_level() {
     ++level_index;
     if (level_index >= LEVEL_COUNT) {
@@ -24,10 +46,10 @@ void load_next_level() {
             char cell = LEVELS[level_index].data[row * level.columns + column];
             if (cell == PLAYER) {
                 set_level_cell(row, column, FLOOR);
-                spawn_player(row, column);
+                Player::getInstance().spawn_player(row, column);
             } else if (cell == PLAYER_ON_GOAL) {
                 set_level_cell(row, column, GOAL);
-                spawn_player(row, column);
+                Player::getInstance().spawn_player(row, column);
             } else {
                 set_level_cell(row, column, cell);
             }
@@ -55,6 +77,6 @@ char& get_level_cell(size_t row, size_t column) {
 
 void set_level_cell(size_t row, size_t column, char cell) {
     level.data[row * level.columns + column] = cell;
-}
+}*/
 
 #endif // LEVELS_H

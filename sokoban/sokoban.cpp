@@ -3,7 +3,6 @@
 #include "globals.h"
 #include "levels.h"
 #include "player.h"
-#include "graphics.h"
 #include "images.h"
 #include "sounds.h"
 
@@ -18,16 +17,16 @@ void update_game() {
         case GAME_STATE:
             SetExitKey(0);
             if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
-                move_player(0, -1);
+                Player::getInstance().move_player(0, -1);
                 return;
             } else if (IsKeyPressed(KEY_S) || IsKeyPressed(KEY_DOWN)) {
-                move_player(0, 1);
+                Player::getInstance().move_player(0, 1);
                 return;
             } else if (IsKeyPressed(KEY_A) || IsKeyPressed(KEY_LEFT)) {
-                move_player(-1, 0);
+                Player::getInstance().move_player(-1, 0);
                 return;
             } else if (IsKeyPressed(KEY_D) || IsKeyPressed(KEY_RIGHT)) {
-                move_player(1, 0);
+                Player::getInstance().move_player(1, 0);
                 return;
             } else if (IsKeyPressed(KEY_ESCAPE)) {
                 game_state = RELOAD_REQ_STATE;
@@ -37,9 +36,9 @@ void update_game() {
             if (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_ENTER)) {
                 game_state = GAME_STATE;
             } else if (IsKeyPressed(KEY_R)) {
-                unload_level();
+                LevelController::getInstance().unload_level();
                 --level_index;
-                load_next_level();
+                LevelController::getInstance().load_next_level();
                 game_state = GAME_STATE;
             }
             break;
@@ -82,7 +81,7 @@ int main() {
     load_fonts();
     load_images();
     load_sounds();
-    load_next_level();
+    LevelController::getInstance().load_next_level();
 
     while (!WindowShouldClose()) {
         BeginDrawing();
@@ -94,7 +93,7 @@ int main() {
     }
     CloseWindow();
 
-    unload_level();
+    LevelController::getInstance().unload_level();
     unload_sounds();
     unload_images();
     unload_fonts();

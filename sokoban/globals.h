@@ -92,8 +92,6 @@ size_t level_index = -1;
 
 /* Player Data */
 
-size_t player_row;
-size_t player_column;
 
 /* Graphics Metrics */
 
@@ -210,16 +208,11 @@ game_state game_state = MENU_STATE;
 
 // LEVELS_H
 
-void load_next_level();
+/*void load_next_level();
 void unload_level();
 bool is_cell_inside_level(int row, int column);
 char& get_level_cell(size_t row, size_t column);
-void set_level_cell(size_t row, size_t column, char cell);
-
-// PLAYER_H
-
-void spawn_player(size_t row, size_t column);
-void move_player(int dx, int dy);
+void set_level_cell(size_t row, size_t column, char cell);*/
 
 // GRAPHICS_H
 

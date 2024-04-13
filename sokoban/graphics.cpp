@@ -3,14 +3,15 @@
 
 #include "raylib.h"
 
-#include "globals.h"
 #include "images.h"
 #include "levels.h"
+#include "globals.h"
 #include "player.h"
 #include "utilities.h"
 
 #include <string>
 #include <cmath>
+
 
 void draw_menu() {
     ClearBackground(BLACK);
@@ -79,7 +80,7 @@ void draw_loaded_level() {
             float x = shift_to_center_cell_by_x + static_cast<float>(column) * cell_size;
             float y = shift_to_center_cell_by_y + static_cast<float>(row)    * cell_size;
 
-            char cell = get_level_cell(row, column);
+            char cell = LevelController::getInstance().get_level_cell(row, column);
             switch (cell) {
                 case FLOOR:
                 case GOAL:
@@ -110,8 +111,8 @@ void draw_loaded_level() {
 }
 
 void draw_player() {
-    float x = shift_to_center_cell_by_x + static_cast<float>(player_column) * cell_size;
-    float y = shift_to_center_cell_by_y + static_cast<float>(player_row)    * cell_size;
+    float x = shift_to_center_cell_by_x + static_cast<float>(Player::getInstance().player_column) * cell_size;
+    float y = shift_to_center_cell_by_y + static_cast<float>(Player::getInstance().player_row)    * cell_size;
     draw_sprite(player_sprite, x, y, cell_size);
 }
 
